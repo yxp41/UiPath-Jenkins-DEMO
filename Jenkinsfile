@@ -62,7 +62,7 @@ pipeline {
 							packagePath: "${UIPATH_PACKAGE}",
 							traceLevel: 'None',
 							environments: ''//,
-							//entryPointPaths: "${PROJECT_ENTRY_POINT}"
+							entryPointPaths: ""
 					)
 
 

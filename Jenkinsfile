@@ -11,7 +11,7 @@ pipeline {
 	        UIPATH_ORCH_LOGICAL_NAME = "testkyqlzlg"
 	        UIPATH_ORCH_TENANT_NAME = "AUX"
 	        UIPATH_ORCH_FOLDER_NAME = "TEST"
-			UIPATH_ORCH_CREDENTIALS = "Orchestrator"
+			UIPATH_ORCH_CREDENTIALS = "OrchestratorSTAGE"
 		
 			
 	    }

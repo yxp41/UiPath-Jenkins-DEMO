@@ -62,7 +62,7 @@ pipeline {
 							packagePath: "${UIPATH_PACKAGE}",
 							traceLevel: 'None',
 							environments: ''//,
-							entryPointPaths: ""
+							entryPointPaths: "Main.xaml"
 					)
 
 

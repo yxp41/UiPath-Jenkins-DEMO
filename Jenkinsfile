@@ -11,6 +11,9 @@ pipeline {
 	        UIPATH_ORCH_LOGICAL_NAME = "testkyqlzlg"
 	        UIPATH_ORCH_TENANT_NAME = "AUX"
 	        UIPATH_ORCH_FOLDER_NAME = "TEST"
+			UIPATH_ORCH_CREDENTIALS = "Orchestrator"
+		
+			
 	    }
 	
 
@@ -45,6 +48,29 @@ pipeline {
 	        )
 	            }
 	        }
+			
+			 // Deploy stages IMPLEMENTING
+	        stage('Deploy to Stage') {
+	            steps {
+	                echo "Building..with ${WORKSPACE}"
+					UiPathDeploy (
+							orchestratorAddress: "${UIPATH_ORCH_URL}",
+							orchestratorTenant: "${UIPATH_ORCH_TENANT_NAME}",
+							folderName: "${UIPATH_ORCH_FOLDER_NAME}",
+							credentials: Token(accountName: "${UIPATH_ORCH_LOGICAL_NAME}", credentialsId: "${UIPATH_ORCH_CREDENTIALS}"), // Automation Cloud
+							//credentials: [$class: 'UserPassAuthenticationEntry', credentialsId: "${UIPATH_ORCH_STAGE_CREDENTIALS}"], // On-Premise
+							packagePath: "${UIPATH_PACKAGE}",
+							traceLevel: 'None',
+							environments: ''//,
+							//entryPointPaths: "${PROJECT_ENTRY_POINT}"
+					)
+
+
+	            }
+	        }
+			
+			
+			
 	         // Test Stages
 	        stage('Test') {
 	            steps {
@@ -53,26 +79,6 @@ pipeline {
 	        }
 	
 
-	         // Deploy Stages
-	        stage('Deploy to UAT') {
-	            steps {
-	                echo "Deploying ${BRANCH_NAME} to UAT "
-	                UiPathDeploy (
-	                packagePath: "Output\\${env.BUILD_NUMBER}",
-	                orchestratorAddress: "${UIPATH_ORCH_URL}",
-	                orchestratorTenant: "${UIPATH_ORCH_TENANT_NAME}",
-	                folderName: "${UIPATH_ORCH_FOLDER_NAME}",
-	                environments: 'DEV',
-	                //credentials: [$class: 'UserPassAuthenticationEntry', credentialsId: 'APIUserKey']
-	                credentials: Token(accountName: "${UIPATH_ORCH_LOGICAL_NAME}", credentialsId: 'APIUserKey'), 
-					traceLevel: 'None',
-					entryPointPaths: 'Main.xaml'
-	
-
-	        )
-	            }
-	        }
-	
 
 	
 

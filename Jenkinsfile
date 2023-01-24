@@ -9,6 +9,7 @@ pipeline {
 	        // Printing Basic Information
 	        stage('Create File'){
 	            steps {
+			    	cleanWs()
 					script{
 						checkout scm
 						def fileContent = "{\n" +
@@ -31,7 +32,8 @@ pipeline {
 	            steps {
 	                echo "Building..with ${WORKSPACE}"
 					bat """
-						git commit -m "CICD Pipeline Deployment"
+						git add "${WORKSPACE}"
+						git commit -am "CICD Pipeline Deployment"
 						"""
 	                
 				}

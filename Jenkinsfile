@@ -31,7 +31,7 @@ pipeline {
 	            steps {
 	                echo "Building..with ${WORKSPACE}"
 					bat """
-						git commit -a "CICD Pipeline Deployment"
+						git commit -m "CICD Pipeline Deployment"
 						"""
 	                
 				}

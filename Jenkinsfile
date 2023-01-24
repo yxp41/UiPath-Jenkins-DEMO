@@ -9,9 +9,9 @@ pipeline {
 	        // Printing Basic Information
 	        stage('Create File'){
 	            steps {
-	                checkout scm
+	                
 					script{
-
+						checkout scm
 						def fileContent = "{\n" +
 							"	\"in_GitlabRepositoryLink\": \"Data1\",\n" +
 							"	\"in_DesignerEmail\": \"\",\n" +

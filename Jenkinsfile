@@ -30,6 +30,9 @@ pipeline {
 	        stage('Git') {
 	            steps {
 	                echo "Building..with ${WORKSPACE}"
+					bat """
+						git commit -am "CICD Pipeline Deployment"
+						"""
 	                
 				}
 	        }		

@@ -18,7 +18,7 @@ pipeline {
 							"}"
 						//def file = new File("TestFile.json")
 						//file.write(fileContent)
-						fileOperations {fileCreateOperation(fileName: "TestFile.json", fileContent: fileContent)
+						fileOperations {fileCreateOperation(fileName: "TestFile.json", fileContent: fileContent)}
 					}
 
 	            }

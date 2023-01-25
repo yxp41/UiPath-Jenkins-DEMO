@@ -35,7 +35,7 @@ pipeline {
 						bat """
 							//git add "${WORKSPACE}"
 							//git commit -am "CICD Pipeline Deployment"
-							git push origin master
+							git push origin QA
 						"""
 					}
 					

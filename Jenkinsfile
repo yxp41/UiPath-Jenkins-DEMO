@@ -31,10 +31,13 @@ pipeline {
 	        stage('Git') {
 	            steps {
 	                echo "Building..with ${WORKSPACE}"
-					bat """
+					withCredentials([gitUsernamePassword(credentialsId: 'GITHUBTOKEN', gitToolName: 'git-tool')]) {
+						  bat """
 						git add "${WORKSPACE}"
 						git commit -am "CICD Pipeline Deployment"
 						"""
+					}
+					
 	                
 				}
 	        }		

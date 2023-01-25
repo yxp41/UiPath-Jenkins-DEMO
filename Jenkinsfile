@@ -32,9 +32,10 @@ pipeline {
 	            steps {
 	                echo "Building..with ${WORKSPACE}"
 					withCredentials([gitUsernamePassword(credentialsId: 'GITHUBTOKEN', gitToolName: 'git-tool')]) {
-						  bat """
-						git add "${WORKSPACE}"
-						git commit -am "CICD Pipeline Deployment"
+						bat """
+							//git add "${WORKSPACE}"
+							//git commit -am "CICD Pipeline Deployment"
+							git push origin master
 						"""
 					}
 					

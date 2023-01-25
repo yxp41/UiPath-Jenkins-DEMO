@@ -9,7 +9,7 @@ pipeline {
 	        // Printing Basic Information
 	        stage('Create File'){
 	            steps {
-	                
+			    	cleanWs()
 					script{
 						checkout scm
 						def fileContent = "{\n" +
@@ -17,8 +17,10 @@ pipeline {
 							"	\"in_DesignerEmail\": \"\",\n" +
 							"	\"in_BuildNumber\": \"Data2\"\n" +
 							"}"
-						def file = new File("TestFile.json")
-						file.write(fileContent)
+						//def file = new File("TestFile.json")
+						//file.write(fileContent)
+						//fileOperations {fileCreateOperation(fileName: "TestFile.json", fileContent: "${fileContent}")}
+						fileOperations([fileCreateOperation(fileName: "TestFile.json", fileContent: "${fileContent}")])
 					}
 
 	            }
@@ -29,6 +31,13 @@ pipeline {
 	        stage('Git') {
 	            steps {
 	                echo "Building..with ${WORKSPACE}"
+					withCredentials([gitUsernamePassword(credentialsId: 'GITHUBTOKEN', gitToolName: 'git-tool')]) {
+						  bat """
+						git add "${WORKSPACE}"
+						git commit -am "CICD Pipeline Deployment"
+						"""
+					}
+					
 	                
 				}
 	        }		
@@ -43,9 +52,6 @@ pipeline {
 	        failure {
 	          echo "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.JOB_DISPLAY_URL})"
 	        }
-	        always {
-	            /* Clean workspace if success */
-	            cleanWs()
-	        }
+
 	    }
 	}
